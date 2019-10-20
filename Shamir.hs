@@ -13,16 +13,15 @@ data User = User {
 
 						
 generatePrivateKeys::SystemKey->IO(Integer,Integer)
-generatePrivateKeys p = withFile "primes.txt" ReadMode 
-									  (\h -> do 
-											   contents <- hGetContents h 
-											   let primesList = (concat.(map(map read)).map words.lines) contents
-											   c <- randomPrime primesList
-											   let d = inversion (c `mod` (p-1)) (p-1)
-											   print $ "c " ++ (show c)
-											   print $ "d " ++ (show d)
-											   return (c,d)
-										)
+generatePrivateKeys p = withFile "primes.txt" ReadMode (\h -> do 
+								contents <- hGetContents h 
+						                let primesList = (concat.(map(map read)).map words.lines) contents
+								c <- randomPrime primesList
+							        let d = inversion (c `mod` (p-1)) (p-1)
+								print $ "c " ++ (show c)
+								print $ "d " ++ (show d)
+								return (c,d)
+							)
 
 sendMessage::String->String->Integer->Power->Modulo->IO Integer
 sendMessage name receiver i p m = do
