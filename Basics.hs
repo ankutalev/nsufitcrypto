@@ -7,7 +7,8 @@ module Basics (
 	randomPrime,
 	randomInteger,
 	Modulo,
-	Power
+	Power,
+	eulerPrimesFormula
 ) where
 
 import System.Random
@@ -60,4 +61,7 @@ genericGcd a b  |b > a = genericGcd b a
 							 helper [x1,x2] [y1,y2] = helper [y1,y2] [x1 `mod` y1, x2 - (y2 * (x1 `div` y1 ))]
 										 
 inversion::Integer->Modulo->Integer
-inversion num mod = if d > 0 then d else d + mod where (_,d) = genericGcd num mod										 
+inversion num mod = if d > 0 then d else d + mod where (_,d) = genericGcd num mod				
+
+eulerPrimesFormula::[Integer]->Integer
+eulerPrimesFormula = product . map (\x->x-1)   					 
