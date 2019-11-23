@@ -65,3 +65,4 @@ inversion num mod = if d > 0 then d else d + mod where (_,d) = genericGcd num mo
 
 eulerPrimesFormula::[Integer]->Integer
 eulerPrimesFormula = product . map (\x->x-1)   					 
+
