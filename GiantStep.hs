@@ -14,10 +14,11 @@ giantStep a y p = answer where
                               (m,k) = getBasicsValues p
                               baby = head [ (i, j) | i<-[1..m-1], j<-[1..k], fastPow a (j*m) p == ((fastPow a i p) * y) `mod` p ]
                               answer = snd baby * m - fst baby
+							  
+-- out : [10000,20000,1000,12345,25000]
 main::IO()
 main = do
 		 let equations = [ (2,24322,30203) ,(2,21740,30323), (2,28620,30539), (2,16190,30803),(5,30994,31607) ]
 		 let answers = map (\(x,y,p) -> giantStep x y p) equations
 		 print answers
-		 putStrLn "Wrong algo!!"
 		 	
