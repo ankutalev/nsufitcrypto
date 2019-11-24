@@ -9,7 +9,8 @@ module Basics (
 	Modulo,
 	Power,
 	eulerPrimesFormula,
-	safeMod
+	safeMod,
+	randomRelativeWith
 ) where
 
 import System.Random
@@ -23,6 +24,11 @@ randomInteger m = do
 				let posx = if x < 0 then (-x) else x
 				return $ posx `mod` m
 		      
+
+randomRelativeWith::Integer->IO Integer
+randomRelativeWith number = do
+                              let numbers = [x| x<- [2..number], gcd x number == 1]
+                              randomPrime numbers
 
 randomPrime::[Integer]->IO Integer
 randomPrime xs = do
